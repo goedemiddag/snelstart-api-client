@@ -8,18 +8,15 @@ namespace SnelstartPHP\Model\V2;
 
 use Money\Money;
 use Ramsey\Uuid\UuidInterface;
-use SnelstartPHP\Model\Adres;
-use SnelstartPHP\Model\IncassoMachtiging;
-use SnelstartPHP\Model\Kostenplaats;
 use SnelstartPHP\Model\SnelstartObject;
 use SnelstartPHP\Model\Type\ProcesStatus;
-use SnelstartPHP\Model\V2 as Model;
+use SnelstartPHP\Model as Model;
 use SnelstartPHP\Snelstart;
 
 final class Offerte extends SnelstartObject
 {
     /**
-     * @var Model\Relatie
+     * @var Model\V2\Relatie
      */
     private $relatie;
 
@@ -75,21 +72,21 @@ final class Offerte extends SnelstartObject
     /**
      * Incassomachtiging
      *
-     * @var IncassoMachtiging
+     * @var Model\IncassoMachtiging
      */
     private $incassomachtiging;
 
     /**
      * het afleveradres van de order
      *
-     * @var Adres
+     * @var Model\Adres
      */
     private $afleveradres;
 
     /**
      * het factuuradres van de order
      *
-     * @var Adres
+     * @var Model\Adres
      */
     private $factuuradres;
 
@@ -101,7 +98,7 @@ final class Offerte extends SnelstartObject
     /**
      * Kostenplaats referentie
      *
-     * @var Kostenplaats
+     * @var Model\Kostenplaats
      */
     private $kostenplaats;
 
@@ -133,7 +130,7 @@ final class Offerte extends SnelstartObject
     /**
      * verkoopfactuur
      *
-     * @var Model\Verkoopfactuur
+     * @var Model\V2\Verkoopfactuur
      */
     private $verkoopfactuur;
 
@@ -192,12 +189,12 @@ final class Offerte extends SnelstartObject
         'isOfferte',
     ];
 
-    public function getRelatie(): Model\Relatie
+    public function getRelatie(): Model\V2\Relatie
     {
         return $this->relatie;
     }
 
-    public function setRelatie(Model\Relatie $relatie): self
+    public function setRelatie(Model\V2\Relatie $relatie): self
     {
         $this->relatie = $relatie;
 
@@ -288,24 +285,24 @@ final class Offerte extends SnelstartObject
         return $this;
     }
 
-    public function getAfleveradres(): ?Adres
+    public function getAfleveradres(): ?Model\Adres
     {
         return $this->afleveradres;
     }
 
-    public function setAfleveradres(?Adres $afleveradres): self
+    public function setAfleveradres(?Model\Adres $afleveradres): self
     {
         $this->afleveradres = $afleveradres;
 
         return $this;
     }
 
-    public function getFactuuradres(): ?Adres
+    public function getFactuuradres(): ?Model\Adres
     {
         return $this->factuuradres;
     }
 
-    public function setFactuuradres(?Adres $factuuradres): self
+    public function setFactuuradres(?Model\Adres $factuuradres): self
     {
         $this->factuuradres = $factuuradres;
 
@@ -324,12 +321,12 @@ final class Offerte extends SnelstartObject
         return $this;
     }
 
-    public function getKostenplaats(): ?Kostenplaats
+    public function getKostenplaats(): ?Model\Kostenplaats
     {
         return $this->kostenplaats;
     }
 
-    public function setKostenplaats(?Kostenplaats $kostenplaats): self
+    public function setKostenplaats(?Model\Kostenplaats $kostenplaats): self
     {
         $this->kostenplaats = $kostenplaats;
 
@@ -387,12 +384,12 @@ final class Offerte extends SnelstartObject
         return $this;
     }
 
-    public function getVerkoopfactuur(): ?Model\Verkoopfactuur
+    public function getVerkoopfactuur(): ?Model\V2\Verkoopfactuur
     {
         return $this->verkoopfactuur;
     }
 
-    public function setVerkoopfactuur(?Model\Verkoopfactuur $verkoopfactuur): self
+    public function setVerkoopfactuur(?Model\V2\Verkoopfactuur $verkoopfactuur): self
     {
         $this->verkoopfactuur = $verkoopfactuur;
 
