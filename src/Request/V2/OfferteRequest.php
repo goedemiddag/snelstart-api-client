@@ -9,7 +9,7 @@ namespace SnelstartPHP\Request\V2;
 
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
-use SnelstartPHP\Model\Offerte;
+use SnelstartPHP\Model\V2\Offerte;
 use SnelstartPHP\Request\BaseRequest;
 use SnelstartPHP\Utils;
 
