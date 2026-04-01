@@ -26,6 +26,7 @@ final class OfferteRequest extends BaseRequest
     {
         return new Request("GET", "offertes/" . $uuid->toString());
     }
+
     public function add(Offerte $offerte): RequestInterface
     {
         return new Request("POST", "offertes", [
