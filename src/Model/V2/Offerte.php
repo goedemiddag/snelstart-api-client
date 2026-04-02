@@ -30,7 +30,7 @@ final class Offerte extends SnelstartObject
     /**
      * Het ordernummer
      *
-     * @var int
+     * @var int|null
      */
     private $nummer;
 
@@ -397,7 +397,7 @@ final class Offerte extends SnelstartObject
 
     public function getTotaalExclusiefBtw(): ?Money
     {
-        return $this->totaalExclusiefBtw ?? new Money("0", Snelstart::getCurrency());
+        return $this->totaalExclusiefBtw;
     }
 
     public function setTotaalExclusiefBtw(Money $totaalExclusiefBtw): self
@@ -409,7 +409,7 @@ final class Offerte extends SnelstartObject
 
     public function getTotaalInclusiefBtw(): ?Money
     {
-        return $this->totaalInclusiefBtw ?? new Money("0", Snelstart::getCurrency());
+        return $this->totaalInclusiefBtw;
     }
 
     public function setTotaalInclusiefBtw(Money $totaalInclusiefBtw): self
@@ -426,7 +426,7 @@ final class Offerte extends SnelstartObject
 
     public function setIsOfferte(bool $isOfferte): self
     {
-        $this->isOfferte = $isOfferte ?? true;
+        $this->isOfferte = $isOfferte;
 
         return $this;
     }

@@ -4,7 +4,6 @@ namespace SnelstartPHP\Tests\Request\V2;
 
 use PHPUnit\Framework\TestCase;
 use SnelstartPHP\Model\Type\ProcesStatus;
-use SnelstartPHP\Model\Type\VerkooporderStatus;
 use SnelstartPHP\Model\V2\Offerte;
 use SnelstartPHP\Request\V2\OfferteRequest;
 
