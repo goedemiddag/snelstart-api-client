@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author  IntoWebDevelopment <info@intowebdevelopment.nl>
+ * @project SnelstartApiPHP
+ */
 
 namespace SnelstartPHP\Connector\V2;
 
