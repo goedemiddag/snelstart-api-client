@@ -14,9 +14,22 @@ use SnelstartPHP\Model\Kostenplaats;
 use SnelstartPHP\Model\Type\ProcesStatus;
 use SnelstartPHP\Model\Type\VerkooporderBtwIngave;
 use SnelstartPHP\Model\V2;
+use SnelstartPHP\Model\V2\Artikel;
 
 final class OfferteMapper extends AbstractMapper
 {
+    public function find(ResponseInterface $response): ?V2\Offerte
+    {
+        $this->setResponseData($response);
+        return $this->mapResponseToOfferteModel(new V2\Offerte());
+    }
+
+    public function findAll(ResponseInterface $response): \Generator
+    {
+        $this->setResponseData($response);
+        yield from $this->mapManyResultsToSubMappers();
+    }
+
     public function add(ResponseInterface $response): V2\Offerte
     {
         $this->setResponseData($response);
@@ -96,5 +109,17 @@ final class OfferteMapper extends AbstractMapper
         }
 
         return $offerte;
+    }
+
+    /**
+     * Map many results to the mapper.
+     *
+     * @return \Generator
+     */
+    protected function mapManyResultsToSubMappers(): \Generator
+    {
+        foreach ($this->responseData as $offerteData) {
+            yield $this->mapResponseToOfferteModel(new V2\Offerte(), $offerteData);
+        }
     }
 }
