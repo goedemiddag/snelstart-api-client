@@ -91,7 +91,7 @@ final class Offerte extends SnelstartObject
     private $factuuradres;
 
     /**
-     * @var string
+     * @var Model\Type\VerkooporderBtwIngave|null
      */
     private $verkooporderBtwIngaveModel;
 
@@ -224,12 +224,12 @@ final class Offerte extends SnelstartObject
         return $this;
     }
 
-    public function getDatum(): \DateTimeInterface
+    public function getDatum(): ?\DateTimeInterface
     {
         return $this->datum;
     }
 
-    public function setDatum(\DateTimeInterface $datum): self
+    public function setDatum(?\DateTimeInterface $datum): self
     {
         $this->datum = $datum;
 
@@ -308,12 +308,12 @@ final class Offerte extends SnelstartObject
         return $this;
     }
 
-    public function getVerkooporderBtwIngaveModel(): ?string
+    public function getVerkooporderBtwIngaveModel(): ?Model\Type\VerkooporderBtwIngave
     {
         return $this->verkooporderBtwIngaveModel;
     }
 
-    public function setVerkooporderBtwIngaveModel(?string $verkooporderBtwIngaveModel): self
+    public function setVerkooporderBtwIngaveModel(Model\Type\VerkooporderBtwIngave $verkooporderBtwIngaveModel): self
     {
         $this->verkooporderBtwIngaveModel = $verkooporderBtwIngaveModel;
 
@@ -424,9 +424,9 @@ final class Offerte extends SnelstartObject
         return $this->isOfferte;
     }
 
-    public function setIsOfferte(?bool $isOfferte = true): self
+    public function setIsOfferte(bool $isOfferte): self
     {
-        $this->isOfferte = $isOfferte;
+        $this->isOfferte = $isOfferte ?? true;
 
         return $this;
     }

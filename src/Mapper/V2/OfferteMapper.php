@@ -13,7 +13,6 @@ use SnelstartPHP\Model\IncassoMachtiging;
 use SnelstartPHP\Model\Kostenplaats;
 use SnelstartPHP\Model\Type\ProcesStatus;
 use SnelstartPHP\Model\Type\VerkooporderBtwIngave;
-use SnelstartPHP\Model\Type\VerkooporderStatus;
 use SnelstartPHP\Model\V2;
 
 final class OfferteMapper extends AbstractMapper

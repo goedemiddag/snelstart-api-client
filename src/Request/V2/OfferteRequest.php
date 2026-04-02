@@ -21,7 +21,7 @@ final class OfferteRequest extends BaseRequest
         return new Request("GET", "offertes?" . $ODataRequestData->getHttpCompatibleQueryString());
     }
 
-    public function findOfferte(UuidInterface $uuid): RequestInterface
+    public function find(UuidInterface $uuid): RequestInterface
     {
         return new Request("GET", "offertes/" . $uuid->toString());
     }

@@ -16,33 +16,32 @@ class OfferteRequestTest extends TestCase
         $this->offerteRequest = new OfferteRequest();
     }
 
-    public function testAddVerkooporderHasVerkooporderStatusUitgevoerd(): void {
+    public function testAddOfferteHasProcesStatusOfferte(): void {
         $offerte = new Offerte();
         $offerte->setProcesStatus(ProcesStatus::OFFERTE());
 
         $expected = [
-            "relatie" => null,
-            "procesStatus" => null,
-            "nummer" => null,
-            "modifiedOn" => null,
-            "datum" => null,
-            "krediettermijn" => null,
-            "omschrijving" => null,
-            "betalingskenmerk" => null,
-            "incassomachtiging" => null,
-            "afleveradres" => null,
-            "factuuradres" => null,
-            "verkooporderBtwIngaveModel" => null,
-            "kostenplaats" => null,
-            "regels" => null,
-            "memo" => null,
-            "orderreferentie" => null,
-            "factuurkorting" => null,
-            "verkoopfactuur" => null,
-            "verkoopordersjabloon" => null,
-            "totaalExclusiefBtw" => "0.00",
-            "totaalInclusiefBtw" => "0.00",
-            "verkoopOrderStatus" => VerkooporderStatus::UITGEVOERD()->getValue(),
+            'relatie' => null,
+            'procesStatus' => ProcesStatus::OFFERTE(),
+            'nummer' => null,
+            'modifiedOn' => null,
+            'datum' => null,
+            'krediettermijn' => null,
+            'omschrijving' => null,
+            'betalingskenmerk' => null,
+            'incassomachtiging' => null,
+            'afleveradres' => null,
+            'factuuradres' => null,
+            'verkooporderBtwIngaveModel' => null,
+            'kostenplaats' => null,
+            'regels' => null,
+            'memo' => null,
+            'orderreferentie' => null,
+            'factuurkorting' => null,
+            'verkoopfactuur' => null,
+            'totaalExclusiefBtw' => '0.00',
+            'totaalInclusiefBtw' => '0.00',
+            'isOfferte' => true,
         ];
         $request = $this->offerteRequest->add($offerte);
 
