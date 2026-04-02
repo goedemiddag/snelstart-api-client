@@ -10,7 +10,6 @@ use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
 use Ramsey\Uuid\UuidInterface;
 use SnelstartPHP\Model\V2\Offerte;
-use SnelstartPHP\Model\V2\Relatie;
 use SnelstartPHP\Request\BaseRequest;
 use SnelstartPHP\Request\ODataRequestDataInterface;
 use SnelstartPHP\Utils;

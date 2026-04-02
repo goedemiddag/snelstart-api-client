@@ -333,9 +333,9 @@ final class Offerte extends SnelstartObject
     }
 
     /**
-     * @return VerkooporderRegel[]
+     * @return VerkooporderRegel[]|null
      */
-    public function getRegels(): iterable
+    public function getRegels(): ?iterable
     {
         return $this->regels;
     }
