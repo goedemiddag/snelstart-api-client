@@ -51,7 +51,7 @@ final class Offerte extends SnelstartObject
     /**
      * de krediettermijn (in dagen) van de offerte
      *
-     * @var ?int
+     * @var int|null
      */
     private $krediettermijn;
 
@@ -65,28 +65,28 @@ final class Offerte extends SnelstartObject
     /**
      * Betalingskenmerk van de order
      *
-     * @var string
+     * @var string|null
      */
     private $betalingskenmerk;
 
     /**
      * Incassomachtiging
      *
-     * @var Model\IncassoMachtiging
+     * @var Model\IncassoMachtiging|null
      */
     private $incassomachtiging;
 
     /**
      * het afleveradres van de order
      *
-     * @var Model\Adres
+     * @var Model\Adres|null
      */
     private $afleveradres;
 
     /**
      * het factuuradres van de order
      *
-     * @var Model\Adres
+     * @var Model\Adres|null
      */
     private $factuuradres;
 
@@ -98,7 +98,7 @@ final class Offerte extends SnelstartObject
     /**
      * Kostenplaats referentie
      *
-     * @var Model\Kostenplaats
+     * @var Model\Kostenplaats|null
      */
     private $kostenplaats;
 
@@ -108,7 +108,7 @@ final class Offerte extends SnelstartObject
     private $regels;
 
     /**
-     * @var string
+     * @var string|null
      */
 
     private $memo;
@@ -116,21 +116,21 @@ final class Offerte extends SnelstartObject
     /**
      * orderreferentie van de offerte
      *
-     * @var string
+     * @var string|null
      */
     private $orderreferentie;
 
     /**
      * factuurkorting
      *
-     * @var Money
+     * @var Money|null
      */
     private $factuurkorting;
 
     /**
      * verkoopfactuur
      *
-     * @var Model\V2\Verkoopfactuur
+     * @var Model\V2\Verkoopfactuur|null
      */
     private $verkoopfactuur;
 
@@ -241,7 +241,7 @@ final class Offerte extends SnelstartObject
         return $this->krediettermijn;
     }
 
-    public function setKrediettermijn(int $krediettermijn): self
+    public function setKrediettermijn(?int $krediettermijn): self
     {
         $this->krediettermijn = $krediettermijn;
 
@@ -277,7 +277,7 @@ final class Offerte extends SnelstartObject
         return $this->incassomachtiging;
     }
 
-    public function setIncassomachtiging(IncassoMachtiging $incassomachtiging): self
+    public function setIncassomachtiging(?IncassoMachtiging $incassomachtiging): self
     {
         $this->incassomachtiging = $incassomachtiging;
 
@@ -376,7 +376,7 @@ final class Offerte extends SnelstartObject
         return $this->factuurkorting;
     }
 
-    public function setFactuurkorting(Money $factuurkorting): self
+    public function setFactuurkorting(?Money $factuurkorting): self
     {
         $this->factuurkorting = $factuurkorting;
 
@@ -397,10 +397,10 @@ final class Offerte extends SnelstartObject
 
     public function getTotaalExclusiefBtw(): ?Money
     {
-        return $this->totaalExclusiefBtw ?? new Money("0", Snelstart::getCurrency());
+        return $this->totaalExclusiefBtw;
     }
 
-    public function setTotaalExclusiefBtw(Money $totaalExclusiefBtw): self
+    public function setTotaalExclusiefBtw(?Money $totaalExclusiefBtw): self
     {
         $this->totaalExclusiefBtw = $totaalExclusiefBtw;
 
@@ -409,16 +409,15 @@ final class Offerte extends SnelstartObject
 
     public function getTotaalInclusiefBtw(): ?Money
     {
-        return $this->totaalInclusiefBtw ?? new Money("0", Snelstart::getCurrency());
+        return $this->totaalInclusiefBtw;
     }
 
-    public function setTotaalInclusiefBtw(Money $totaalInclusiefBtw): self
+    public function setTotaalInclusiefBtw(?Money $totaalInclusiefBtw): self
     {
         $this->totaalInclusiefBtw = $totaalInclusiefBtw;
 
         return $this;
     }
-
 
     public function getIsOfferte(): bool
     {
