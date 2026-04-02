@@ -425,7 +425,7 @@ final class Verkooporder extends SnelstartObject
 
     public function getTotaalExclusiefBtw(): ?Money
     {
-        return $this->totaalExclusiefBtw;
+        return $this->totaalExclusiefBtw ?? new Money("0", Snelstart::getCurrency());
     }
 
     public function setTotaalExclusiefBtw(Money $totaalExclusiefBtw): self
@@ -437,7 +437,7 @@ final class Verkooporder extends SnelstartObject
 
     public function getTotaalInclusiefBtw(): ?Money
     {
-        return $this->totaalInclusiefBtw;
+        return $this->totaalInclusiefBtw ?? new Money("0", Snelstart::getCurrency());
     }
 
     public function setTotaalInclusiefBtw(Money $totaalInclusiefBtw): self

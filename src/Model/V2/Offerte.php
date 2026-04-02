@@ -419,6 +419,7 @@ final class Offerte extends SnelstartObject
         return $this;
     }
 
+
     public function getIsOfferte(): bool
     {
         return $this->isOfferte;
