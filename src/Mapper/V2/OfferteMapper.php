@@ -14,14 +14,13 @@ use SnelstartPHP\Model\Kostenplaats;
 use SnelstartPHP\Model\Type\ProcesStatus;
 use SnelstartPHP\Model\Type\VerkooporderBtwIngave;
 use SnelstartPHP\Model\V2;
-use SnelstartPHP\Model\V2\Artikel;
 
 final class OfferteMapper extends AbstractMapper
 {
     public function find(ResponseInterface $response): ?V2\Offerte
     {
         $this->setResponseData($response);
-        return $this->mapResponseToOfferteModel(new V2\Offerte());
+        return $this->map(new V2\Offerte());
     }
 
     public function findAll(ResponseInterface $response): \Generator
