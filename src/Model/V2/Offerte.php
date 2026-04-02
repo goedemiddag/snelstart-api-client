@@ -7,7 +7,7 @@
 namespace SnelstartPHP\Model\V2;
 
 use Money\Money;
-use Ramsey\Uuid\UuidInterface;
+use SnelstartPHP\Model\IncassoMachtiging;
 use SnelstartPHP\Model\SnelstartObject;
 use SnelstartPHP\Model\Type\ProcesStatus;
 use SnelstartPHP\Model as Model;
@@ -16,7 +16,7 @@ use SnelstartPHP\Snelstart;
 final class Offerte extends SnelstartObject
 {
     /**
-     * @var Model\V2\Relatie
+     * @var Model\V2\Relatie|null
      */
     private $relatie;
 
@@ -51,7 +51,7 @@ final class Offerte extends SnelstartObject
     /**
      * de krediettermijn (in dagen) van de offerte
      *
-     * @var int
+     * @var ?int
      */
     private $krediettermijn;
 
@@ -123,7 +123,7 @@ final class Offerte extends SnelstartObject
     /**
      * factuurkorting
      *
-     * @var float
+     * @var Money
      */
     private $factuurkorting;
 
@@ -150,20 +150,6 @@ final class Offerte extends SnelstartObject
     private $isOfferte = true;
 
     /**
-     * Public identifier
-     *
-     * @var UuidInterface
-     */
-    protected $id;
-
-    /**
-     * uri van het object
-     *
-     * @var string
-     */
-    protected $uri;
-
-    /**
      * @var string[]
      */
     public static $editableAttributes = [
@@ -175,6 +161,7 @@ final class Offerte extends SnelstartObject
         'krediettermijn',
         'omschrijving',
         'betalingskenmerk',
+        'incassomachtiging',
         'afleveradres',
         'factuuradres',
         'verkooporderBtwIngaveModel',
@@ -189,7 +176,7 @@ final class Offerte extends SnelstartObject
         'isOfferte',
     ];
 
-    public function getRelatie(): Model\V2\Relatie
+    public function getRelatie(): ?Model\V2\Relatie
     {
         return $this->relatie;
     }
@@ -249,12 +236,12 @@ final class Offerte extends SnelstartObject
         return $this;
     }
 
-    public function getKrediettermijn(): ?string
+    public function getKrediettermijn(): ?int
     {
         return $this->krediettermijn;
     }
 
-    public function setKrediettermijn(?string $krediettermijn): self
+    public function setKrediettermijn(int $krediettermijn): self
     {
         $this->krediettermijn = $krediettermijn;
 
@@ -281,6 +268,18 @@ final class Offerte extends SnelstartObject
     public function setBetalingskenmerk(?string $betalingskenmerk): self
     {
         $this->betalingskenmerk = $betalingskenmerk;
+
+        return $this;
+    }
+
+    public function getIncassomachtiging(): ?IncassoMachtiging
+    {
+        return $this->incassomachtiging;
+    }
+
+    public function setIncassomachtiging(IncassoMachtiging $incassomachtiging): self
+    {
+        $this->incassomachtiging = $incassomachtiging;
 
         return $this;
     }
@@ -372,12 +371,12 @@ final class Offerte extends SnelstartObject
         return $this;
     }
 
-    public function getFactuurkorting(): ?string
+    public function getFactuurkorting(): ?Money
     {
         return $this->factuurkorting;
     }
 
-    public function setFactuurkorting(?string $factuurkorting): self
+    public function setFactuurkorting(Money $factuurkorting): self
     {
         $this->factuurkorting = $factuurkorting;
 
