@@ -14,7 +14,7 @@ use SnelstartPHP\Request\V2\OfferteRequest;
 
 final class OfferteConnector extends BaseConnector
 {
-    public function find(UuidInterface $id, ?ODataRequestData $ODataRequestData = null): ?Offerte
+    public function find(UuidInterface $id): ?Offerte
     {
         $mapper = new OfferteMapper();
         $request = new OfferteRequest();

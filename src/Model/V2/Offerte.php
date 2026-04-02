@@ -44,7 +44,7 @@ final class Offerte extends SnelstartObject
     /**
      * Orderdatum
      *
-     * @var \DateTimeInterface
+     * @var \DateTimeInterface|null
      */
     private $datum;
 
@@ -58,7 +58,7 @@ final class Offerte extends SnelstartObject
     /**
      * Omschrijving van de order
      *
-     * @var string
+     * @var string|null
      */
     private $omschrijving;
 
