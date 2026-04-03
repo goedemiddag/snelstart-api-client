@@ -13,14 +13,18 @@ use SnelstartPHP\Model\IncassoMachtiging;
 use SnelstartPHP\Model\Kostenplaats;
 use SnelstartPHP\Model\Type\ProcesStatus;
 use SnelstartPHP\Model\Type\VerkooporderBtwIngave;
-use SnelstartPHP\Model\V2;
+use SnelstartPHP\Model\V2\Artikel;
+use SnelstartPHP\Model\V2\Offerte;
+use SnelstartPHP\Model\V2\Relatie;
+use SnelstartPHP\Model\V2\Verkoopfactuur;
+use SnelstartPHP\Model\V2\VerkooporderRegel;
 
 final class OfferteMapper extends AbstractMapper
 {
-    public function find(ResponseInterface $response): ?V2\Offerte
+    public function find(ResponseInterface $response): ?Offerte
     {
         $this->setResponseData($response);
-        return $this->map(new V2\Offerte());
+        return $this->map(new Offerte());
     }
 
     public function findAll(ResponseInterface $response): \Generator
@@ -29,33 +33,33 @@ final class OfferteMapper extends AbstractMapper
         yield from $this->mapManyResultsToSubMappers();
     }
 
-    public function add(ResponseInterface $response): V2\Offerte
+    public function add(ResponseInterface $response): Offerte
     {
         $this->setResponseData($response);
-        return $this->mapResponseToOfferteModel(new V2\Offerte());
+        return $this->mapResponseToOfferteModel(new Offerte());
     }
 
-    private function mapResponseToOfferteModel(V2\Offerte $offerte, array $data = []): V2\Offerte
+    private function mapResponseToOfferteModel(Offerte $offerte, array $data = []): Offerte
     {
         $data = empty($data) ? $this->responseData : $data;
         /**
-         * @var V2\Offerte $offerte
+         * @var Offerte $offerte
          */
         $offerte = $this->map($offerte, $data);
 
         return $offerte;
     }
 
-    public function map(V2\Offerte $offerte, array $data = []): V2\Offerte
+    public function map(Offerte $offerte, array $data = []): Offerte
     {
         $data = empty($data) ? $this->responseData : $data;
         $adresMapper = new AdresMapper();
 
         /**
-         * @var V2\Offerte $offerte
+         * @var Offerte $offerte
          */
         $offerte = $this->mapArrayDataToModel($offerte, $data);
-        $offerte->setRelatie(V2\Relatie::createFromUUID(Uuid::fromString($data["relatie"]["id"])))
+        $offerte->setRelatie(Relatie::createFromUUID(Uuid::fromString($data["relatie"]["id"])))
             ->setProcesStatus(new ProcesStatus($data["procesStatus"]));
 
         if ($data["incassomachtiging"] !== null) {
@@ -75,8 +79,8 @@ final class OfferteMapper extends AbstractMapper
         }
 
         $regels = array_map(function(array $data) {
-            return (new V2\VerkooporderRegel())
-                ->setArtikel(V2\Artikel::createFromUUID(Uuid::fromString($data["artikel"]["id"])))
+            return (new VerkooporderRegel())
+                ->setArtikel(Artikel::createFromUUID(Uuid::fromString($data["artikel"]["id"])))
                 ->setOmschrijving($data["omschrijving"])
                 ->setStuksprijs($this->getMoney($data["stuksprijs"]))
                 ->setAantal($data["aantal"])
@@ -100,7 +104,7 @@ final class OfferteMapper extends AbstractMapper
         }
 
         if ($data["verkoopfactuur"] !== null) {
-            $offerte->setVerkoopfactuur(V2\Verkoopfactuur::createFromUUID(Uuid::fromString($data["verkoopfactuur"])));
+            $offerte->setVerkoopfactuur(Verkoopfactuur::createFromUUID(Uuid::fromString($data["verkoopfactuur"])));
         }
 
         if ($data["verkooporderBtwIngaveModel"] !== null) {
@@ -118,7 +122,7 @@ final class OfferteMapper extends AbstractMapper
     protected function mapManyResultsToSubMappers(): \Generator
     {
         foreach ($this->responseData as $offerteData) {
-            yield $this->mapResponseToOfferteModel(new V2\Offerte(), $offerteData);
+            yield $this->mapResponseToOfferteModel(new Offerte(), $offerteData);
         }
     }
 }

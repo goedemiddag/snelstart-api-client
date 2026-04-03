@@ -11,7 +11,8 @@ class OfferteRequestTest extends TestCase
 {
     private $offerteRequest;
 
-    public function setUp(): void {
+    public function setUp(): void
+    {
         $this->offerteRequest = new OfferteRequest();
     }
 
