@@ -7,138 +7,132 @@
 namespace SnelstartPHP\Model\V2;
 
 use Money\Money;
-use SnelstartPHP\Model\Adres;
 use SnelstartPHP\Model\IncassoMachtiging;
-use SnelstartPHP\Model\Kostenplaats;
 use SnelstartPHP\Model\SnelstartObject;
 use SnelstartPHP\Model\Type\ProcesStatus;
-use SnelstartPHP\Model\Type\VerkooporderBtwIngave;
-use SnelstartPHP\Model\Type\VerkooporderStatus;
+use SnelstartPHP\Model as Model;
 use SnelstartPHP\Snelstart;
 
-final class Verkooporder extends SnelstartObject
+final class Offerte extends SnelstartObject
 {
     /**
-     * @var Relatie|null
+     * @var Model\V2\Relatie|null
      */
     private $relatie;
 
     /**
-     * Status van de order. Als deze niet is opgegeven wordt de default waarde order gebruikt. Contantbon en Factuur zijn niet beschikbaar
+     * Status van de order
      *
      * @var ProcesStatus|null
      */
     private $procesStatus;
 
     /**
-     * Het ordernummer.
+     * Het ordernummer
      *
      * @var int|null
      */
     private $nummer;
 
     /**
-     * Het tijdstip waarop de verkooporder voor het laatst is gewijzigd.
+     * Datum waarop de gegevens van deze relatie zijn aangepast
      *
-     * @var \DateTimeImmutable|null
+     * @var \DateTimeInterface|null
      */
     private $modifiedOn;
 
     /**
-     * De orderdatum.
+     * Orderdatum
      *
-     * @var \DateTimeImmutable|null
+     * @var \DateTimeInterface|null
      */
     private $datum;
 
     /**
-     * De krediettermijn (in dagen) van de verkooporder.
-     * Indien dit veld leeg is dan wordt het krediettermijn van de klant gebruikt.
+     * de krediettermijn (in dagen) van de offerte
      *
      * @var int|null
      */
     private $krediettermijn;
 
     /**
-     * De omschrijving van de order.
+     * Omschrijving van de order
      *
      * @var string|null
      */
     private $omschrijving;
 
     /**
-     * Het betalingskenmerk van de order.
+     * Betalingskenmerk van de order
      *
      * @var string|null
      */
     private $betalingskenmerk;
 
     /**
-     * De incassomachtiging.
+     * Incassomachtiging
      *
-     * @var IncassoMachtiging|null
+     * @var Model\IncassoMachtiging|null
      */
     private $incassomachtiging;
 
     /**
-     * Het afleveradres
+     * het afleveradres van de order
      *
-     * @var Adres|null
+     * @var Model\Adres|null
      */
     private $afleveradres;
 
     /**
-     * Een container voor adres informatie.
+     * het factuuradres van de order
      *
-     * @var Adres|null
+     * @var Model\Adres|null
      */
     private $factuuradres;
 
     /**
-     * @var VerkooporderBtwIngave|null
+     * @var Model\Type\VerkooporderBtwIngave|null
      */
     private $verkooporderBtwIngaveModel;
 
     /**
-     * @var Kostenplaats|null
+     * Kostenplaats referentie
+     *
+     * @var Model\Kostenplaats|null
      */
     private $kostenplaats;
 
     /**
-     * @var VerkooporderRegel[]|null
+     * @var VerkooporderRegel[]
      */
     private $regels;
 
     /**
      * @var string|null
      */
+
     private $memo;
 
     /**
-     * De orderreferentie van een verkooporder. Deze wordt in de e-factuur en in de factuur als PDF opgenomen
+     * orderreferentie van de offerte
      *
      * @var string|null
      */
     private $orderreferentie;
 
     /**
+     * factuurkorting
+     *
      * @var Money|null
      */
     private $factuurkorting;
 
     /**
-     * Verkoopfactuur identifier
+     * verkoopfactuur
      *
-     * @var Verkoopfactuur|null
+     * @var Model\V2\Verkoopfactuur|null
      */
     private $verkoopfactuur;
-
-    /**
-     * Het te gebruiken sjaboon voor deze verkooporden. Dit veld is optioneel
-     *
-     * @var Verkoopordersjabloon|null
-     */
-    private $verkoopordersjabloon;
 
     /**
      * @var Money|null
@@ -151,53 +145,43 @@ final class Verkooporder extends SnelstartObject
     private $totaalInclusiefBtw;
 
     /**
-     * Status van de order. Als deze niet is opgegeven wordt de default waarde InBehandeling gebruikt.
-     *
-     * @var VerkooporderStatus|null
+     * @var bool
      */
-    private $verkoopOrderStatus;
+    private $isOfferte = true;
 
     /**
      * @var string[]
      */
     public static $editableAttributes = [
-        "relatie",
-        "procesStatus",
-        "nummer",
-        "modifiedOn",
-        "datum",
-        "krediettermijn",
-        "omschrijving",
-        "betalingskenmerk",
-        "incassomachtiging",
-        "afleveradres",
-        "factuuradres",
-        "verkooporderBtwIngaveModel",
-        "kostenplaats",
-        "regels",
-        "memo",
-        "orderreferentie",
-        "factuurkorting",
-        "verkoopfactuur",
-        "verkoopordersjabloon",
-        "totaalExclusiefBtw",
-        "totaalInclusiefBtw",
-        "verkoopOrderStatus",
+        'relatie',
+        'procesStatus',
+        'nummer',
+        'modifiedOn',
+        'datum',
+        'krediettermijn',
+        'omschrijving',
+        'betalingskenmerk',
+        'incassomachtiging',
+        'afleveradres',
+        'factuuradres',
+        'verkooporderBtwIngaveModel',
+        'kostenplaats',
+        'regels',
+        'memo',
+        'orderreferentie',
+        'factuurkorting',
+        'verkoopfactuur',
+        'totaalExclusiefBtw',
+        'totaalInclusiefBtw',
+        'isOfferte',
     ];
 
-    public static function getEditableAttributes(): array
-    {
-        return \array_unique(
-            \array_merge(parent::$editableAttributes, parent::getEditableAttributes(), static::$editableAttributes, self::$editableAttributes)
-        );
-    }
-
-    public function getRelatie(): ?Relatie
+    public function getRelatie(): ?Model\V2\Relatie
     {
         return $this->relatie;
     }
 
-    public function setRelatie(Relatie $relatie): self
+    public function setRelatie(Model\V2\Relatie $relatie): self
     {
         $this->relatie = $relatie;
 
@@ -209,7 +193,7 @@ final class Verkooporder extends SnelstartObject
         return $this->procesStatus;
     }
 
-    public function setProcesStatus(ProcesStatus $procesStatus): self
+    public function setProcesStatus(?ProcesStatus $procesStatus): self
     {
         $this->procesStatus = $procesStatus;
 
@@ -221,31 +205,31 @@ final class Verkooporder extends SnelstartObject
         return $this->nummer;
     }
 
-    public function setNummer(int $nummer): self
+    public function setNummer(?int $nummer): self
     {
         $this->nummer = $nummer;
 
         return $this;
     }
 
-    public function getModifiedOn(): ?\DateTimeImmutable
+    public function getModifiedOn(): ?\DateTimeInterface
     {
         return $this->modifiedOn;
     }
 
-    public function setModifiedOn(\DateTimeImmutable $modifiedOn): self
+    public function setModifiedOn(?\DateTimeInterface $modifiedOn): self
     {
         $this->modifiedOn = $modifiedOn;
 
         return $this;
     }
 
-    public function getDatum(): ?\DateTimeImmutable
+    public function getDatum(): ?\DateTimeInterface
     {
         return $this->datum;
     }
 
-    public function setDatum(\DateTimeImmutable $datum): self
+    public function setDatum(?\DateTimeInterface $datum): self
     {
         $this->datum = $datum;
 
@@ -257,7 +241,7 @@ final class Verkooporder extends SnelstartObject
         return $this->krediettermijn;
     }
 
-    public function setKrediettermijn(int $krediettermijn): self
+    public function setKrediettermijn(?int $krediettermijn): self
     {
         $this->krediettermijn = $krediettermijn;
 
@@ -269,7 +253,7 @@ final class Verkooporder extends SnelstartObject
         return $this->omschrijving;
     }
 
-    public function setOmschrijving(string $omschrijving): self
+    public function setOmschrijving(?string $omschrijving): self
     {
         $this->omschrijving = $omschrijving;
 
@@ -281,7 +265,7 @@ final class Verkooporder extends SnelstartObject
         return $this->betalingskenmerk;
     }
 
-    public function setBetalingskenmerk(string $betalingskenmerk): self
+    public function setBetalingskenmerk(?string $betalingskenmerk): self
     {
         $this->betalingskenmerk = $betalingskenmerk;
 
@@ -300,48 +284,48 @@ final class Verkooporder extends SnelstartObject
         return $this;
     }
 
-    public function getAfleveradres(): ?Adres
+    public function getAfleveradres(): ?Model\Adres
     {
         return $this->afleveradres;
     }
 
-    public function setAfleveradres(Adres $afleveradres): self
+    public function setAfleveradres(?Model\Adres $afleveradres): self
     {
         $this->afleveradres = $afleveradres;
 
         return $this;
     }
 
-    public function getFactuuradres(): ?Adres
+    public function getFactuuradres(): ?Model\Adres
     {
         return $this->factuuradres;
     }
 
-    public function setFactuuradres(Adres $factuuradres): self
+    public function setFactuuradres(?Model\Adres $factuuradres): self
     {
         $this->factuuradres = $factuuradres;
 
         return $this;
     }
 
-    public function getVerkooporderBtwIngaveModel(): ?VerkooporderBtwIngave
+    public function getVerkooporderBtwIngaveModel(): ?Model\Type\VerkooporderBtwIngave
     {
         return $this->verkooporderBtwIngaveModel;
     }
 
-    public function setVerkooporderBtwIngaveModel(VerkooporderBtwIngave $verkooporderBtwIngaveModel): self
+    public function setVerkooporderBtwIngaveModel(Model\Type\VerkooporderBtwIngave $verkooporderBtwIngaveModel): self
     {
         $this->verkooporderBtwIngaveModel = $verkooporderBtwIngaveModel;
 
         return $this;
     }
 
-    public function getKostenplaats(): ?Kostenplaats
+    public function getKostenplaats(): ?Model\Kostenplaats
     {
         return $this->kostenplaats;
     }
 
-    public function setKostenplaats(?Kostenplaats $kostenplaats): self
+    public function setKostenplaats(?Model\Kostenplaats $kostenplaats): self
     {
         $this->kostenplaats = $kostenplaats;
 
@@ -349,7 +333,7 @@ final class Verkooporder extends SnelstartObject
     }
 
     /**
-     * @return VerkooporderRegel[]
+     * @return VerkooporderRegel[]|null
      */
     public function getRegels(): ?iterable
     {
@@ -399,26 +383,14 @@ final class Verkooporder extends SnelstartObject
         return $this;
     }
 
-    public function getVerkoopfactuur(): ?Verkoopfactuur
+    public function getVerkoopfactuur(): ?Model\V2\Verkoopfactuur
     {
         return $this->verkoopfactuur;
     }
 
-    public function setVerkoopfactuur(?Verkoopfactuur $verkoopfactuur): self
+    public function setVerkoopfactuur(?Model\V2\Verkoopfactuur $verkoopfactuur): self
     {
         $this->verkoopfactuur = $verkoopfactuur;
-
-        return $this;
-    }
-
-    public function getVerkoopordersjabloon(): ?Verkoopordersjabloon
-    {
-        return $this->verkoopordersjabloon;
-    }
-
-    public function setVerkoopordersjabloon(Verkoopordersjabloon $verkoopordersjabloon): self
-    {
-        $this->verkoopordersjabloon = $verkoopordersjabloon;
 
         return $this;
     }
@@ -447,14 +419,14 @@ final class Verkooporder extends SnelstartObject
         return $this;
     }
 
-    public function getVerkoopOrderStatus(): ?VerkooporderStatus
+    public function getIsOfferte(): bool
     {
-        return $this->verkoopOrderStatus;
+        return $this->isOfferte;
     }
 
-    public function setVerkoopOrderStatus(?VerkooporderStatus $verkoopOrderStatus): self
+    public function setIsOfferte(bool $isOfferte): self
     {
-        $this->verkoopOrderStatus = $verkoopOrderStatus;
+        $this->isOfferte = $isOfferte;
 
         return $this;
     }
