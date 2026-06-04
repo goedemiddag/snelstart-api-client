@@ -1,16 +1,16 @@
 {
-    "name":"iwd-nl/snelstart-php",
+    "name":"goedemiddag/snelstart-api-client",
     "license": "GPL-3.0-or-later",
     "type": "library",
-    "description": "Snelstart API toegepast in PHP",
-    "homepage": "https://github.com/iwd-nl/snelstart-php",
+    "description": "Snelstart API wrapper",
+    "homepage": "https://github.com/goedemiddag/snelstart-api-client",
     "keywords": [
         "snelstart"
     ],
     "authors": [
         {
-            "name": "IntoWebDevelopment",
-            "email": "manuel@mail.iwdev.nl"
+            "name": "Jirzy Kerklaan",
+            "email": "jirzy@goedemiddag.nl"
         }
     ],
     "require": {
